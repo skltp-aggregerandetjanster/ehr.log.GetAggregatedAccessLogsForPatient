@@ -1,0 +1,11 @@
+/.project
+/GetAggregatedLogsForPatient-schemas/*.project
+/GetAggregatedLogsForPatient-schemas/*.classpath
+/.settings
+/GetAggregatedLogsForPatient-teststub/*.project
+/GetAggregatedLogsForPatient-teststub/*.classpath
+/GetAggregatedLogsForPatient/*.project
+/GetAggregatedLogsForPatient-schemas/.settings/*.prefs
+/GetAggregatedLogsForPatient/*.classpath
+*.prefs
+target
