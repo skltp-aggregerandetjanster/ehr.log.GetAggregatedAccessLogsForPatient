@@ -41,8 +41,8 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
   </scm>
 
   <modules>
-    <!--<module>GetAggregatedLogsForPatient</module>-->
-    <!--<module>GetAggregatedLogsForPatient-teststub</module>-->
+    <module>GetAggregatedLogsForPatient</module>
+    <module>GetAggregatedLogsForPatient-teststub</module>
     <module>GetAggregatedLogsForPatient-schemas</module>
   </modules>
 

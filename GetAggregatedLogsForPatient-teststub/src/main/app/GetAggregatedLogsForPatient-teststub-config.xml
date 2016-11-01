@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule 
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:spring="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+		http://www.mulesoft.org/schema/mule/core    http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+	">
+
+    <spring:beans>
+      <!-- Load all resources needed by the core artifact -->
+      <spring:import resource="classpath:aggregating-services-common.xml"/>
+      
+      <spring:bean class="org.jasypt.spring.properties.EncryptablePropertyPlaceholderConfigurer" id="propertyConfigurer">
+        <spring:constructor-arg ref="configurationEncryptor"/>
+        <spring:property name="ignoreResourceNotFound" value="true"/>
+        <spring:property name="locations">
+          <spring:list>
+            <spring:value>classpath:GetAggregatedLogsForPatient-config.properties</spring:value>
+	        <spring:value>classpath:agp-config-override.properties</spring:value>
+            <spring:value>classpath:GetAggregatedLogsForPatient-config-override.properties</spring:value>
+          </spring:list>
+        </spring:property>
+      </spring:bean>
+      
+      <!-- Load all teststub services -->
+      <spring:import resource="classpath:teststub-services/*-teststub-service.xml"/>
+      <spring:import resource="classpath:teststub-non-default-services/tak-teststub-service.xml" />
+
+    </spring:beans>
+
+</mule>

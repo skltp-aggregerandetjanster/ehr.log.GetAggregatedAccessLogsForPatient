@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:GetAccessLogsForPatientResponse xmlns:tns="urn:riv:ehr:log:querying:GetAccessLogsForPatientResponder:1" xmlns:tns1="urn:riv:ehr:log:querying:1">
+  <tns:AccessLogsResultType>
+    <tns1:Result>
+      <tns1:ResultCode>INFO</tns1:ResultCode>
+      <tns1:ResultText>INFO</tns1:ResultText>
+      <!--Optional:-->
+      <tns1:StartInterval>2010-10-26T21:32:52</tns1:StartInterval>
+      <!--Optional:-->
+      <tns1:EndInterval>2011-10-26T21:32:52</tns1:EndInterval>
+      <!--Optional:-->
+      <tns1:QueuedReportId>queued report id 1</tns1:QueuedReportId>
+      <!--Optional:-->
+      <tns1:QueueTime>1000000</tns1:QueueTime>
+      <!--You may enter ANY elements at this point-->
+    </tns1:Result>
+    <!--Optional:-->
+    <tns1:AccesssLogs>
+      <!--Zero or more repetitions:-->
+      <tns1:AccessLog>
+        <tns1:CareProviderId>care provider id 1</tns1:CareProviderId>
+        <!--Optional:-->
+        <tns1:CareProviderName>care provider name 1</tns1:CareProviderName>
+        <tns1:CareUnitId>care unit id 1</tns1:CareUnitId>
+        <!--Optional:-->
+        <tns1:CareUnitName>care unit name 1</tns1:CareUnitName>
+        <tns1:AccessDate>2016-10-26T21:32:52</tns1:AccessDate>
+        <tns1:Purpose>regular visit</tns1:Purpose>
+        <tns1:ResourceType>resource type 1</tns1:ResourceType>
+        <!--You may enter ANY elements at this point-->
+      </tns1:AccessLog>
+      <!--You may enter ANY elements at this point-->
+    </tns1:AccesssLogs>
+    <!--You may enter ANY elements at this point-->
+  </tns:AccessLogsResultType>
+  <!--You may enter ANY elements at this point-->
+</tns:GetAccessLogsForPatientResponse>
