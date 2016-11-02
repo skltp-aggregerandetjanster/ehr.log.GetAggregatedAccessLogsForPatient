@@ -8,6 +8,6 @@ trait CommonParameters {
   var baseUrl:String         = if (System.getProperty("baseUrl") != null && !System.getProperty("baseUrl").isEmpty()) {
                                    System.getProperty("baseUrl")
                                } else {
-                                   "http://33.33.33.33:8081/GetAggregatedLogsForPatient/service/v2"
+                                   "http://33.33.33.33:8081/GetAggregatedLogsForPatient/service/v1"
                                }
 }
