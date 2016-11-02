@@ -35,7 +35,6 @@ public class ResponseListFactoryImpl implements ResponseListFactory {
 
         aggregatedResponse.getAccessLogsResultType().setResult(new ResultType());
         aggregatedResponse.getAccessLogsResultType().getResult().setResultCode(ResultCodeType.INFO);
-        //aggregatedResponse.getResult().setLogId("NA");
 
         if (log.isInfoEnabled()) {
             String subjectOfCareId = queryObject.getFindContent().getRegisteredResidentIdentification();

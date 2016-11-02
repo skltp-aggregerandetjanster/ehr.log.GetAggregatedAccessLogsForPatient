@@ -45,7 +45,6 @@ public class QueryObjectFactoryImpl implements QueryObjectFactory {
         fc.setRegisteredResidentIdentification(req.getPatientId());
         fc.setServiceDomain(eiServiceDomain);
         fc.setCategorization(eiCategorization);
-//        fc.setSourceSystem(req.getSourceSystemHSAId());
 
         QueryObject qo = new QueryObject(fc, req);
 
