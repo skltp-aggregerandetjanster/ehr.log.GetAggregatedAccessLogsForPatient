@@ -24,13 +24,11 @@ import javax.xml.ws.Holder;
 import javax.xml.ws.soap.SOAPFaultException;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
 
-import org.springframework.util.Assert;
 import riv.ehr.log.querying.getaccesslogsforpatientresponder.v1.GetAccessLogsForPatientResponseType;
 import riv.ehr.log.querying.v1.AccessLogType;
 import se.skltp.agp.cache.TakCacheBean;
