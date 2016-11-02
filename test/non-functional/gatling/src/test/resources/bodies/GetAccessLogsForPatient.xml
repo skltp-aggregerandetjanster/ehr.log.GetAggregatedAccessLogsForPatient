@@ -1,0 +1,15 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:itintegration:registry:1" xmlns:urn1="urn:riv:ehr:log:querying:GetAccessLogsForPatientResponder:1">
+<soapenv:Header>
+   <urn:LogicalAddress>?</urn:LogicalAddress>
+</soapenv:Header>
+<soapenv:Body>
+   <urn1:GetAccessLogsForPatientRequest>
+      <urn1:PatientId>${patientid}</urn1:PatientId>
+      <urn1:FromDate>2010-10-26T21:32:52</urn1:FromDate>
+      <urn1:ToDate>2011-10-26T21:32:52</urn1:ToDate>
+      <!--Optional:-->
+      <urn1:QueuedReportId>567</urn1:QueuedReportId>
+      <!--You may enter ANY elements at this point-->
+   </urn1:GetAccessLogsForPatientRequest>
+</soapenv:Body>
+</soapenv:Envelope>
