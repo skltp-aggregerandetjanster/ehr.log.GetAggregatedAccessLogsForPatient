@@ -202,6 +202,7 @@ public class AccessLogsForPatientIntegrationTest extends AbstractAggregateIntegr
         // Verify the response size and content
         GetAccessLogsForPatientResponseType response = responseHolder.value;
         int expextedResponseSize = testData.length;
+
         assertEquals(expextedResponseSize, response.getAccessLogsResultType().getAccesssLogs().getAccessLog().size());
 
         for (int i = 0; i < testData.length; i++) {

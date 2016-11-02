@@ -10,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.w3c.dom.Element;
 import riv.ehr.log.querying.getaccesslogsforpatientresponder.v1.GetAccessLogsForPatientRequestType;
 import se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentResponseType;
 import se.skltp.agp.riv.itintegration.engagementindex.v1.EngagementType;
@@ -44,7 +45,7 @@ public class RequestListFactoryImpl implements RequestListFactory {
         GetAccessLogsForPatientRequestType request = (GetAccessLogsForPatientRequestType) qo.getExtraArg();
 
 //        String sourceSystemHsaId = request.getSourceSystemHSAId();
-        String sourceSystemHsaId = !request.getAny().isEmpty() ? (String) request.getAny().get(0) : ""; //"HSA-ID-X"
+        String sourceSystemHsaId = "";
 
         FindContentResponseType eiResp = (FindContentResponseType) findContentResponse;
         List<EngagementType> inEngagements = eiResp.getEngagement();

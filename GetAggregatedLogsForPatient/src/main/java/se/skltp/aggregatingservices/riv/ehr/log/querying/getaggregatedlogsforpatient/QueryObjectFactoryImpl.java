@@ -46,9 +46,7 @@ public class QueryObjectFactoryImpl implements QueryObjectFactory {
         fc.setServiceDomain(eiServiceDomain);
         fc.setCategorization(eiCategorization);
 //        fc.setSourceSystem(req.getSourceSystemHSAId());
-        if (!req.getAny().isEmpty()) {
-            fc.setSourceSystem(String.valueOf(req.getAny().get(0)));
-        }
+
         QueryObject qo = new QueryObject(fc, req);
 
         return qo;

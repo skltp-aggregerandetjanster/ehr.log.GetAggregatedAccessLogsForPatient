@@ -256,7 +256,8 @@
                   <goal>java</goal>
                 </goals>
                 <configuration>
-                  <mainClass>se.skltp.agp.MuleServer</mainClass>
+                  <mainClass>se.skltp.aggregatingaccesslogsforpatient.AccessLogsForPatientMuleServer</mainClass>
+                  <!--<mainClass>se.skltp.agp.MuleServer</mainClass>-->
                   <classpathScope>test</classpathScope>
                 </configuration>
               </execution>
