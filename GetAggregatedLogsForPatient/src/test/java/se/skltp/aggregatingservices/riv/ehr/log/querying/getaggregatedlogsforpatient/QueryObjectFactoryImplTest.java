@@ -49,7 +49,6 @@ public class QueryObjectFactoryImplTest {
     public void createQueryObject_with_source_system() throws Exception {
         GetAccessLogsForPatientRequestType getAccessLogsForPatientDoc = new GetAccessLogsForPatientRequestType();
         getAccessLogsForPatientDoc.setPatientId(RR_ID);
-//        getAccessLogsForPatientDoc.setSourceSystemHSAId(SOURCE_SYSTEM);
 
         Document doc = createDocument(getAccessLogsForPatientDoc);
         QueryObject queryObj = objectFactory.createQueryObject(doc);
