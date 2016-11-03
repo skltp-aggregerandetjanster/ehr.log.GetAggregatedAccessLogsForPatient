@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class ResponseListFactoryImplTest {
 
@@ -59,7 +60,7 @@ public class ResponseListFactoryImplTest {
         }
 
         GetAccessLogsForPatientResponseType response = (GetAccessLogsForPatientResponseType) jaxbUtil.unmarshal(sb.toString());
-        assertEquals(0, response.getAccessLogsResultType().getAccesssLogs().getAccessLog().size());
+        assertNull(response.getAccessLogsResultType());
     }
 
     @Test

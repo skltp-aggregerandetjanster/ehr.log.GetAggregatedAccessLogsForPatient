@@ -1,24 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tns:GetAccessLogsForPatientResponse xmlns:tns="urn:riv:ehr:log:querying:GetAccessLogsForPatientResponder:1" xmlns:tns1="urn:riv:ehr:log:querying:1">
-  <tns:AccessLogsResultType>
-    <tns1:Result>
-      <tns1:ResultCode>INFO</tns1:ResultCode>
-      <tns1:ResultText>INFO</tns1:ResultText>
+  <AccessLogsResultType>
+    <Result>
+      <ResultCode>INFO</ResultCode>
+      <ResultText>INFO</ResultText>
       <!--Optional:-->
-      <tns1:StartInterval>2010-10-26T21:32:52</tns1:StartInterval>
+      <StartInterval>2010-10-26T21:32:52</StartInterval>
       <!--Optional:-->
-      <tns1:EndInterval>2011-10-26T21:32:52</tns1:EndInterval>
+      <EndInterval>2011-10-26T21:32:52</EndInterval>
       <!--Optional:-->
-      <tns1:QueuedReportId>queued report id 1</tns1:QueuedReportId>
+      <QueuedReportId>queued report id 1</QueuedReportId>
       <!--Optional:-->
-      <tns1:QueueTime>1000000</tns1:QueueTime>
+      <QueueTime>1000000</QueueTime>
       <!--You may enter ANY elements at this point-->
-    </tns1:Result>
+    </Result>
     <!--Optional:-->
-    <tns1:AccesssLogs>
+    <AccesssLogs>
+      <!--Zero or more repetitions:-->
+      <AccessLog>
+        <CareProviderId>care provider id 1</CareProviderId>
+        <!--Optional:-->
+        <CareProviderName>care provider name 1</CareProviderName>
+        <CareUnitId>care unit id 1</CareUnitId>
+        <!--Optional:-->
+        <CareUnitName>care unit name 1</CareUnitName>
+        <AccessDate>2016-10-26T21:32:52</AccessDate>
+        <Purpose>regular visit</Purpose>
+        <ResourceType>resource type 1</ResourceType>
+        <!--You may enter ANY elements at this point-->
+      </AccessLog>
       <!--You may enter ANY elements at this point-->
-    </tns1:AccesssLogs>
+    </AccesssLogs>
     <!--You may enter ANY elements at this point-->
-  </tns:AccessLogsResultType>
+  </AccessLogsResultType>
   <!--You may enter ANY elements at this point-->
 </tns:GetAccessLogsForPatientResponse>
