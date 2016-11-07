@@ -1,2 +1,2 @@
-# ehr.log.GetAggregatedLogsForPatient
+# ehr.log.GetAggregatedAccessLogsForPatient
 Aggregating service for GetLogsForPatient

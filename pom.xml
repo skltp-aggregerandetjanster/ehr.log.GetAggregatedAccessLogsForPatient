@@ -18,10 +18,10 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
   </parent>
 
   <groupId>se.skltp.aggregatingservices.riv.ehr.log</groupId>
-  <artifactId>GetAggregatedLogsForPatient-parent</artifactId>
+  <artifactId>GetAggregatedAccessLogsForPatient-parent</artifactId>
   <version>1.1_RC3-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>GetAggregatedLogsForPatient-parent</name>
+  <name>GetAggregatedAccessLogsForPatient-parent</name>
 
   <properties>
     <skltp.agp.version>2.2</skltp.agp.version>
@@ -29,21 +29,21 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 
   <scm>
     <url>
-      https://github.com/skltp-aggregerandetjanster/riv.ehr.log.GetAggregatedLogsForPatient
+      https://github.com/skltp-aggregerandetjanster/riv.ehr.log.GetAggregatedAccessLogsForPatient
     </url>
     <connection>
-      scm:git:git://github.com/skltp-aggregerandetjanster/riv.ehr.log.GetAggregatedLogsForPatient.git
+      scm:git:git://github.com/skltp-aggregerandetjanster/riv.ehr.log.GetAggregatedAccessLogsForPatient.git
     </connection>
     <developerConnection>
-      scm:git:git://github.com/skltp-aggregerandetjanster/riv.ehr.log.GetAggregatedLogsForPatient.git
+      scm:git:git://github.com/skltp-aggregerandetjanster/riv.ehr.log.GetAggregatedAccessLogsForPatient.git
     </developerConnection>
     <tag>v2.1.1</tag>
   </scm>
 
   <modules>
-    <module>GetAggregatedLogsForPatient</module>
-    <module>GetAggregatedLogsForPatient-teststub</module>
-    <module>GetAggregatedLogsForPatient-schemas</module>
+    <module>GetAggregatedAccessLogsForPatient</module>
+    <module>GetAggregatedAccessLogsForPatient-teststub</module>
+    <module>GetAggregatedAccessLogsForPatient-schemas</module>
   </modules>
 
   <build>
