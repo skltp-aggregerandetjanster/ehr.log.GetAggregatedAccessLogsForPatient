@@ -41,10 +41,7 @@ public class QueryObjectFactoryImpl implements QueryObjectFactory {
 
         log.debug("Transformed payload for pid: {}", req.getPatientId());
 
-        FindContentType fc = new FindContentType();
-        fc.setRegisteredResidentIdentification(req.getPatientId());
-        fc.setServiceDomain(eiServiceDomain);
-        fc.setCategorization(eiCategorization);
+        FindContentType fc = null;
 
         QueryObject qo = new QueryObject(fc, req);
 
