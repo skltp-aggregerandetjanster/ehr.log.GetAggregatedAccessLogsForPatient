@@ -37,7 +37,7 @@ public class QueryObjectFactoryImplTest {
         Document doc = createDocument(getAccessLogsForPatientDoc);
         QueryObject queryObj = objectFactory.createQueryObject(doc);
 
-        assertNotNull(queryObj.getFindContent());
+        assertNotNull(queryObj.getExtraArg());
     }
 
     @Ignore(value = "SOURCE_SYSTEM is not avai")
@@ -49,8 +49,8 @@ public class QueryObjectFactoryImplTest {
         Document doc = createDocument(getAccessLogsForPatientDoc);
         QueryObject queryObj = objectFactory.createQueryObject(doc);
 
-        assertNotNull(queryObj.getFindContent());
-        assertEquals(SOURCE_SYSTEM, queryObj.getFindContent().getSourceSystem());
+//        assertNotNull(queryObj.getFindContent());
+//        assertEquals(SOURCE_SYSTEM, queryObj.getFindContent().getSourceSystem());
     }
 
     private Document createDocument(GetAccessLogsForPatientRequestType getAccessLogsForPatientRequestType) throws Exception {
