@@ -35,7 +35,6 @@ import se.skltp.agp.cache.TakCacheBean;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusRecordType;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
 import se.skltp.agp.test.consumer.AbstractAggregateIntegrationTest;
-import se.skltp.agp.test.consumer.ExpectedTestData;
 import se.skltp.agp.test.producer.EngagemangsindexTestProducerLogger;
 import se.skltp.agp.test.producer.TestProducerLogger;
 
@@ -75,7 +74,7 @@ public class AccessLogsForPatientIntegrationTest extends AbstractAggregateIntegr
      */
     @Test
     public void test_ok_zero_hits() {
-        doTest(TEST_RR_ID_ZERO_HITS, 0);
+        doTest(TEST_RR_ID_ZERO_HITS, 7, 0);
     }
 
     /**
@@ -84,21 +83,21 @@ public class AccessLogsForPatientIntegrationTest extends AbstractAggregateIntegr
     @Test
     public void test_fault_missing_http_headers() {
         try {
-            doTest(TEST_RR_ID_ZERO_HITS, null, SAMPLE_ORIGINAL_CONSUMER_HSAID, SAMPLE_CORRELATION_ID, 0);
+            doTest(TEST_RR_ID_ZERO_HITS, null, SAMPLE_ORIGINAL_CONSUMER_HSAID, SAMPLE_CORRELATION_ID, 0, 0);
             fail("This one should fail on missing http header");
         } catch (SOAPFaultException e) {
             assertEquals("Mandatory HTTP header x-vp-sender-id is missing", e.getMessage());
         }
 
         try {
-            doTest(TEST_RR_ID_ZERO_HITS, SAMPLE_SENDER_ID, null, SAMPLE_CORRELATION_ID, 0);
+            doTest(TEST_RR_ID_ZERO_HITS, SAMPLE_SENDER_ID, null, SAMPLE_CORRELATION_ID, 0, 0);
             fail("This one should fail on missing http header");
         } catch (SOAPFaultException e) {
             assertEquals("\nMandatory HTTP header x-rivta-original-serviceconsumer-hsaid is missing", e.getMessage());
         }
 
         try {
-            doTest(TEST_RR_ID_ZERO_HITS, null, null, null, 0);
+            doTest(TEST_RR_ID_ZERO_HITS, null, null, null, 0, 0);
             fail("This one should fail on missing http header");
         } catch (SOAPFaultException e) {
             String s = e.getMessage();
@@ -112,8 +111,8 @@ public class AccessLogsForPatientIntegrationTest extends AbstractAggregateIntegr
      */
     @Test
     public void test_ok_one_hit() {
-        List<ProcessingStatusRecordType> statusList = doTest(TEST_RR_ID_ONE_HIT, 2, new ExpectedTestData(TEST_BO_ID_ONE_HIT, TEST_LOGICAL_ADDRESS_1));
-        assertProcessingStatusDataFromSource(statusList.get(0), TEST_LOGICAL_ADDRESS_1);
+        List<ProcessingStatusRecordType> statusList = doTest(TEST_RR_ID_ONE_HIT, 7, 1);
+        assertProcessingStatusDataFromSource(findProcessingStatusRecordType(TEST_LOGICAL_ADDRESS_1, statusList), TEST_LOGICAL_ADDRESS_1);
     }
 
     /**
@@ -123,15 +122,12 @@ public class AccessLogsForPatientIntegrationTest extends AbstractAggregateIntegr
     public void test_ok_many_hits_with_partial_timeout() {
 
         // Setup call and verify the response, expect one booking from source #1, two from source #2 and a timeout from source #3
-        List<ProcessingStatusRecordType> statusList = doTest(TEST_RR_ID_MANY_HITS, 3,
-                new ExpectedTestData(TEST_BO_ID_MANY_HITS_1, TEST_LOGICAL_ADDRESS_1),
-                new ExpectedTestData(TEST_BO_ID_MANY_HITS_2, TEST_LOGICAL_ADDRESS_2),
-                new ExpectedTestData(TEST_BO_ID_MANY_HITS_3, TEST_LOGICAL_ADDRESS_2));
+        List<ProcessingStatusRecordType> statusList = doTest(TEST_RR_ID_MANY_HITS, 7, 3);
 
         // Verify the Processing Status, expect ok from source system #1 and #2 but a timeout from #3
-        assertProcessingStatusDataFromSource(statusList.get(0), TEST_LOGICAL_ADDRESS_1);
-        assertProcessingStatusDataFromSource(statusList.get(1), TEST_LOGICAL_ADDRESS_2);
-        assertProcessingStatusNoDataSynchFailed(statusList.get(2), TEST_LOGICAL_ADDRESS_3, VIRTUALIZATION_PLATFORM, EXPECTED_ERR_TIMEOUT_MSG);
+        assertProcessingStatusDataFromSource(findProcessingStatusRecordType(TEST_LOGICAL_ADDRESS_1, statusList), TEST_LOGICAL_ADDRESS_1);
+        assertProcessingStatusDataFromSource(findProcessingStatusRecordType(TEST_LOGICAL_ADDRESS_2, statusList), TEST_LOGICAL_ADDRESS_2);
+        assertProcessingStatusNoDataSynchFailed(findProcessingStatusRecordType(TEST_LOGICAL_ADDRESS_3, statusList), TEST_LOGICAL_ADDRESS_3, VIRTUALIZATION_PLATFORM, EXPECTED_ERR_TIMEOUT_MSG);
     }
 
     /**
@@ -140,10 +136,10 @@ public class AccessLogsForPatientIntegrationTest extends AbstractAggregateIntegr
     @Test
     public void test_fault_invalidInput() throws Exception {
 
-        List<ProcessingStatusRecordType> statusList = doTest(TEST_RR_ID_FAULT_INVALID_ID, 1);
+        List<ProcessingStatusRecordType> statusList = doTest(TEST_RR_ID_FAULT_INVALID_ID, 7, 0);
 
         // Verify the Processing Status, expect a processing failure from the source system
-        assertProcessingStatusNoDataSynchFailed(statusList.get(0), TEST_LOGICAL_ADDRESS_1, VIRTUALIZATION_PLATFORM, EXPECTED_ERR_INVALID_ID_MSG);
+        assertProcessingStatusNoDataSynchFailed(findProcessingStatusRecordType(TEST_LOGICAL_ADDRESS_1, statusList), TEST_LOGICAL_ADDRESS_1, VIRTUALIZATION_PLATFORM, EXPECTED_ERR_INVALID_ID_MSG);
     }
 
     //	TODO: Mule EE dependency
@@ -155,15 +151,15 @@ public class AccessLogsForPatientIntegrationTest extends AbstractAggregateIntegr
         String expectedLogicalAddress = TEST_LOGICAL_ADDRESS_1;
 
         long ts = System.currentTimeMillis();
-        List<ProcessingStatusRecordType> statusList = doTest(registeredResidentId, 1, new ExpectedTestData(expectedBookingId, expectedLogicalAddress));
+        List<ProcessingStatusRecordType> statusList = doTest(registeredResidentId, 1, 3);
         ts = System.currentTimeMillis() - ts;
-        assertProcessingStatusDataFromSource(statusList.get(0), expectedLogicalAddress);
+        assertProcessingStatusDataFromSource(findProcessingStatusRecordType(expectedLogicalAddress, statusList), expectedLogicalAddress);
         assertTrue("Expected a long processing time (i.e. a non cached response)", ts > expectedProcessingTime);
 
         ts = System.currentTimeMillis();
-        statusList = doTest(registeredResidentId, 1, new ExpectedTestData(expectedBookingId, expectedLogicalAddress));
+        statusList = doTest(registeredResidentId, 1, 3);
         ts = System.currentTimeMillis() - ts;
-        assertProcessingStatusDataFromCache(statusList.get(0), expectedLogicalAddress);
+        assertProcessingStatusDataFromCache(findProcessingStatusRecordType(expectedLogicalAddress, statusList), expectedLogicalAddress);
         assertTrue("Expected a short processing time (i.e. a cached response)", ts < expectedProcessingTime);
     }
 
@@ -172,11 +168,10 @@ public class AccessLogsForPatientIntegrationTest extends AbstractAggregateIntegr
      *
      * @param registeredResidentId
      * @param expectedProcessingStatusSize
-     * @param testData
      * @return
      */
-	private List<ProcessingStatusRecordType> doTest(String registeredResidentId, int expectedProcessingStatusSize, ExpectedTestData... testData) {
-		return doTest(registeredResidentId, SAMPLE_SENDER_ID, SAMPLE_ORIGINAL_CONSUMER_HSAID, SAMPLE_CORRELATION_ID, expectedProcessingStatusSize, testData);
+	private List<ProcessingStatusRecordType> doTest(String registeredResidentId, int expectedProcessingStatusSize, int expectedResponseSize) {
+		return doTest(registeredResidentId, SAMPLE_SENDER_ID, SAMPLE_ORIGINAL_CONSUMER_HSAID, SAMPLE_CORRELATION_ID, expectedProcessingStatusSize, expectedResponseSize);
     }
 
 	/**
@@ -186,10 +181,9 @@ public class AccessLogsForPatientIntegrationTest extends AbstractAggregateIntegr
      * @param senderId
      * @param originalConsumerHsaId
      * @param expectedProcessingStatusSize
-     * @param testData
      * @return
      */
-    private List<ProcessingStatusRecordType> doTest(String registeredResidentId, String senderId, String originalConsumerHsaId, String correlationId, int expectedProcessingStatusSize, ExpectedTestData... testData) {
+    private List<ProcessingStatusRecordType> doTest(String registeredResidentId, String senderId, String originalConsumerHsaId, String correlationId, int expectedProcessingStatusSize, int expectedResponseSize) {
 
         // Setup and perform the call to the web service
         AccessLogsForPatientTestConsumer consumer = new AccessLogsForPatientTestConsumer(DEFAULT_SERVICE_ADDRESS, senderId, originalConsumerHsaId, correlationId);
@@ -199,19 +193,13 @@ public class AccessLogsForPatientIntegrationTest extends AbstractAggregateIntegr
 
         // Verify the response size and content
         GetAccessLogsForPatientResponseType response = responseHolder.value;
-        int expextedResponseSize = testData.length;
 
-        assertEquals(expextedResponseSize, response.getAccessLogsResultType().getAccesssLogs().getAccessLog().size());
+        assertEquals(expectedResponseSize, response.getAccessLogsResultType().getAccesssLogs().getAccessLog().size());
 
-        for (int i = 0; i < testData.length; i++) {
+        for (int i = 0; i < response.getAccessLogsResultType().getAccesssLogs().getAccessLog().size(); i++) {
             AccessLogType responseElement = response.getAccessLogsResultType().getAccesssLogs().getAccessLog().get(i);
             assertNotNull(responseElement.getCareProviderId());
-//            assertEquals(registeredResidentId, responseElement.getCareServiceHeader().getPatientId().getId());
-//            assertEquals(testData[i].getExpectedBusinessObjectId(), responseElement.getCareServiceHeader().getDocumentId());
-//            assertEquals(testData[i].getExpectedLogicalAddress(),
-//            		responseElement.getCareServiceHeader().getSourceSystemHSAId());
         }
-
 
         // Verify the size of the processing status and return it for further analysis
  		ProcessingStatusType statusList = processingStatusHolder.value;
@@ -233,4 +221,14 @@ public class AccessLogsForPatientIntegrationTest extends AbstractAggregateIntegr
         return statusList.getProcessingStatusList();
     }
 
+    private ProcessingStatusRecordType findProcessingStatusRecordType(String expectedLogicalAddress, List<ProcessingStatusRecordType> statusList) {
+        ProcessingStatusRecordType foundProcessingStatus = null;
+        for (ProcessingStatusRecordType processingStatus : statusList) {
+            if (expectedLogicalAddress.equals(processingStatus.getLogicalAddress())) {
+                foundProcessingStatus = processingStatus;
+                break;
+            }
+        }
+        return foundProcessingStatus;
+    }
 }

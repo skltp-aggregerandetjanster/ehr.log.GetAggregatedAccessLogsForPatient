@@ -42,7 +42,7 @@ public class AccessLogsForPatientTestProducerDb extends TestProducerDb {
                 new Object[]{logicalAddress, registeredResidentId, businessObjectId});
 
         AccessLogType response = new AccessLogType();
-        response.setCareProviderId("care provider id 1");
+        response.setCareProviderId("care provider id 1 /" + registeredResidentId + " /" + logicalAddress);
         response.setCareProviderName("Vårdcentralen Kusten, Kärna");
         response.setCareUnitId("care unit id 1");
         response.setCareUnitName("Vårdcentralen Kusten, Kärna");

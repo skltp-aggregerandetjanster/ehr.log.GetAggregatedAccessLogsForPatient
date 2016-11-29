@@ -53,5 +53,6 @@ public class RequestListFactoryImpl implements RequestListFactory {
         }
 
         log.debug("Transformed payload: {}", reqList);
-        return reqList;	}
+        return reqList;
+	}
 }

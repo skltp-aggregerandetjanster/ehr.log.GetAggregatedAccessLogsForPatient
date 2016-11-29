@@ -38,10 +38,6 @@ public class QueryObjectFactoryImplTest {
         QueryObject queryObj = objectFactory.createQueryObject(doc);
 
         assertNotNull(queryObj.getFindContent());
-        assertEquals(SERVICE_DOMAIN, queryObj.getFindContent().getServiceDomain());
-        assertEquals(CATEGORIZATION, queryObj.getFindContent().getCategorization());
-        assertEquals(RR_ID, queryObj.getFindContent().getRegisteredResidentIdentification());
-        assertNull(queryObj.getFindContent().getSourceSystem());
     }
 
     @Ignore(value = "SOURCE_SYSTEM is not avai")
