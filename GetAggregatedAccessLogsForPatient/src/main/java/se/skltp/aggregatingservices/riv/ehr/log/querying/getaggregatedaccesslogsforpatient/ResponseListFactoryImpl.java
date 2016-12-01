@@ -37,10 +37,8 @@ public class ResponseListFactoryImpl implements ResponseListFactory {
         aggregatedResponse.getAccessLogsResultType().getResult().setResultCode(ResultCodeType.INFO);
 
         if (log.isInfoEnabled()) {
-            log.info("Returning {} aggregated access logs for subject of care id {}",
-                    aggregatedResponse.getAccessLogsResultType().getAccesssLogs().getAccessLog().size(),
-                    queryObject.getFindContent() != null ?
-                            queryObject.getFindContent().getRegisteredResidentIdentification() : "#no findContent#");
+            log.info("Returning {} aggregated access logs",
+                    aggregatedResponse.getAccessLogsResultType().getAccesssLogs().getAccessLog().size());
         }
 
         // Since the class GetAccessLogsForPatientResponseType don't have an @XmlRootElement annotation
