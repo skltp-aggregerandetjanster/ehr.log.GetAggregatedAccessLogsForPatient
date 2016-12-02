@@ -36,12 +36,14 @@ public class AccessLogsForPatientTestProducer implements GetAccessLogsForPatient
         GetAccessLogsForPatientResponseType response = (GetAccessLogsForPatientResponseType) testDb.processRequest(logicalAddress, request.getPatientId());
         if (response == null) {
             // Return an empty response object instead of null if nothing is found
-            response = new GetAccessLogsForPatientResponseType();
+            log.info("### Virtual service got {} documents in the reply from the source system with logical address: {} and patientId: {}",
+                    new Object[]{0, logicalAddress, request.getPatientId()});
+            throw new RuntimeException("Service returned no documents in the reply from the source system");
+        } else {
+
+        	log.info("### Virtual service got {} documents in the reply from the source system with logical address: {} and patientId: {}",
+        			new Object[]{response.getAccessLogsResultType().getAccesssLogs().getAccessLog().size(), logicalAddress, request.getPatientId()});
         }
-
-        log.info("### Virtual service got {} documents in the reply from the source system with logical address: {} and patientId: {}",
-                new Object[]{response.getAccessLogsResultType().getAccesssLogs().getAccessLog().size(), logicalAddress, request.getPatientId()});
-
         // We are done
         return response;
     }
