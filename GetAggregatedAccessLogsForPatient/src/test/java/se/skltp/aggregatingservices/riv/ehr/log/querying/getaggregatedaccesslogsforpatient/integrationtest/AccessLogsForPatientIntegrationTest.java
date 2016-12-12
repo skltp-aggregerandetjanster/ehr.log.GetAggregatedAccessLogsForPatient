@@ -31,6 +31,7 @@ import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
 
 import riv.ehr.log.querying.getaccesslogsforpatientresponder.v1.GetAccessLogsForPatientResponseType;
 import riv.ehr.log.querying.v1.AccessLogType;
+import riv.ehr.log.querying.v1.AccessLogsResultType;
 import se.skltp.agp.cache.TakCacheBean;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusRecordType;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
@@ -194,11 +195,12 @@ public class AccessLogsForPatientIntegrationTest extends AbstractAggregateIntegr
         // Verify the response size and content
         GetAccessLogsForPatientResponseType response = responseHolder.value;
 
-        assertEquals(expectedResponseSize, response.getAccessLogsResultType().getAccesssLogs().getAccessLog().size());
+        assertEquals(expectedResponseSize, response.getAccessLogsResultType().size());
 
-        for (int i = 0; i < response.getAccessLogsResultType().getAccesssLogs().getAccessLog().size(); i++) {
-            AccessLogType responseElement = response.getAccessLogsResultType().getAccesssLogs().getAccessLog().get(i);
-            assertNotNull(responseElement.getCareProviderId());
+        for (int i = 0; i < response.getAccessLogsResultType().size(); i++) {
+            AccessLogsResultType responseElement = response.getAccessLogsResultType().get(i);
+            AccessLogType x = responseElement.getAccesssLogs().getAccessLog().get(0);
+            assertNotNull(x.getCareProviderId());
         }
 
         // Verify the size of the processing status and return it for further analysis

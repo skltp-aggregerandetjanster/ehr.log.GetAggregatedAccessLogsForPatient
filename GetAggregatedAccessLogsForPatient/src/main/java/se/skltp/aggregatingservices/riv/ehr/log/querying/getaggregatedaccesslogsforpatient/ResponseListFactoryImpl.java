@@ -24,21 +24,16 @@ public class ResponseListFactoryImpl implements ResponseListFactory {
     @Override
     public String getXmlFromAggregatedResponse(QueryObject queryObject, List<Object> aggregatedResponseList) {
         GetAccessLogsForPatientResponseType aggregatedResponse = new GetAccessLogsForPatientResponseType();
-        aggregatedResponse.setAccessLogsResultType(new AccessLogsResultType());
-        aggregatedResponse.getAccessLogsResultType().setAccesssLogs(new AccessLogsType());
 
         for (Object object : aggregatedResponseList) {
             GetAccessLogsForPatientResponseType response = (GetAccessLogsForPatientResponseType) object;
-            aggregatedResponse.getAccessLogsResultType().getAccesssLogs().getAccessLog()
-                    .addAll(response.getAccessLogsResultType().getAccesssLogs().getAccessLog());
+            aggregatedResponse.getAccessLogsResultType()
+                    .addAll(response.getAccessLogsResultType());
         }
-
-        aggregatedResponse.getAccessLogsResultType().setResult(new ResultType());
-        aggregatedResponse.getAccessLogsResultType().getResult().setResultCode(ResultCodeType.INFO);
 
         if (log.isInfoEnabled()) {
             log.info("Returning {} aggregated access logs",
-                    aggregatedResponse.getAccessLogsResultType().getAccesssLogs().getAccessLog().size());
+                    aggregatedResponse.getAccessLogsResultType().size());
         }
 
         // Since the class GetAccessLogsForPatientResponseType don't have an @XmlRootElement annotation

@@ -1,6 +1,6 @@
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:itintegration:registry:1" xmlns:urn1="urn:riv:ehr:log:querying:GetAccessLogsForPatientResponder:1">
 <soapenv:Header>
-   <urn:LogicalAddress>?</urn:LogicalAddress>
+   <urn:LogicalAddress>5565594230</urn:LogicalAddress>
 </soapenv:Header>
 <soapenv:Body>
    <urn1:GetAccessLogsForPatientRequest>

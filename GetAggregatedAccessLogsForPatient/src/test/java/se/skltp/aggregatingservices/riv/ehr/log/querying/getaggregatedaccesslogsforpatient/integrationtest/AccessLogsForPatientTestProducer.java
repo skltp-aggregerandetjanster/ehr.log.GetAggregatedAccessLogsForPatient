@@ -42,7 +42,7 @@ public class AccessLogsForPatientTestProducer implements GetAccessLogsForPatient
         } else {
 
         	log.info("### Virtual service got {} documents in the reply from the source system with logical address: {} and patientId: {}",
-        			new Object[]{response.getAccessLogsResultType().getAccesssLogs().getAccessLog().size(), logicalAddress, request.getPatientId()});
+        			new Object[]{response.getAccessLogsResultType().size(), logicalAddress, request.getPatientId()});
         }
         // We are done
         return response;

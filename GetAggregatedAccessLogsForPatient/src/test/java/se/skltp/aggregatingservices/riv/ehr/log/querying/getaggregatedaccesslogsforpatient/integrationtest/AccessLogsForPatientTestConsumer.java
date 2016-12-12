@@ -29,7 +29,7 @@ public class AccessLogsForPatientTestConsumer extends AbstractTestConsumer<GetAc
         Holder<ProcessingStatusType> processingStatusHolder = new Holder<ProcessingStatusType>();
         long now = System.currentTimeMillis();
         consumer.callService("logical-adress", personnummer, processingStatusHolder, responseHolder);
-        log.info("Returned #care contact = " + responseHolder.value.getAccessLogsResultType().getAccesssLogs().getAccessLog().size() + " in " + (System.currentTimeMillis() - now) + " ms.");
+        log.info("Returned #care contact = " + responseHolder.value.getAccessLogsResultType().size() + " in " + (System.currentTimeMillis() - now) + " ms.");
     }
 
     public AccessLogsForPatientTestConsumer(String serviceAddress, String senderId, String originalConsumerHsaId, String correlationId) {

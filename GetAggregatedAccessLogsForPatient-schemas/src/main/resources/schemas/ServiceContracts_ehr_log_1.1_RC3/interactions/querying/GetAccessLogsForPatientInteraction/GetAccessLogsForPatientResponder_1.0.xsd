@@ -76,7 +76,8 @@
 		    </xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="AccessLogsResultType" type="logquerying:AccessLogsResultType"/>
+			<xs:element name="AccessLogsResultType" type="logquerying:AccessLogsResultType" minOccurs="0"
+        		maxOccurs="unbounded"/>
 			<xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
 		</xs:sequence>
 	</xs:complexType>

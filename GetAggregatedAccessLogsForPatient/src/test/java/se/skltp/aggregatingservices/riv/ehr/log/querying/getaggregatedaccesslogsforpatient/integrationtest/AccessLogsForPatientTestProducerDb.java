@@ -7,6 +7,8 @@ import riv.ehr.log.querying.getaccesslogsforpatientresponder.v1.GetAccessLogsFor
 import riv.ehr.log.querying.v1.AccessLogType;
 import riv.ehr.log.querying.v1.AccessLogsResultType;
 import riv.ehr.log.querying.v1.AccessLogsType;
+import riv.ehr.log.querying.v1.ResultType;
+import riv.ehr.log.v1.ResultCodeType;
 import se.skltp.agp.test.producer.TestProducerDb;
 
 import java.util.GregorianCalendar;
@@ -19,10 +21,10 @@ public class AccessLogsForPatientTestProducerDb extends TestProducerDb {
     public Object createResponse(Object... responseItems) {
         log.debug("Creates a response with {} items", responseItems);
 
-        GetAccessLogsForPatientResponseType response = createGetAccessLogsForPatientResponseType();
+        GetAccessLogsForPatientResponseType response = new GetAccessLogsForPatientResponseType();
 
         for (int i = 0; i < responseItems.length; i++) {
-            response.getAccessLogsResultType().getAccesssLogs().getAccessLog().add((AccessLogType) responseItems[i]);
+            response.getAccessLogsResultType().add((AccessLogsResultType) responseItems[i]);
         }
 
         return response;
@@ -30,8 +32,8 @@ public class AccessLogsForPatientTestProducerDb extends TestProducerDb {
 
     private GetAccessLogsForPatientResponseType createGetAccessLogsForPatientResponseType() {
         GetAccessLogsForPatientResponseType response = new GetAccessLogsForPatientResponseType();
-        response.setAccessLogsResultType(new AccessLogsResultType());
-        response.getAccessLogsResultType().setAccesssLogs(new AccessLogsType());
+        response.getAccessLogsResultType().add(new AccessLogsResultType());
+        response.getAccessLogsResultType().get(0).setAccesssLogs(new AccessLogsType());
 
         return response;
     }
@@ -41,15 +43,24 @@ public class AccessLogsForPatientTestProducerDb extends TestProducerDb {
         log.debug("Created one response item for logical-address {}, registeredResidentId {} and businessObjectId {}",
                 new Object[]{logicalAddress, registeredResidentId, businessObjectId});
 
-        AccessLogType response = new AccessLogType();
-        response.setCareProviderId("care provider id 1 /" + registeredResidentId + " /" + logicalAddress);
-        response.setCareProviderName("Vårdcentralen Kusten, Kärna");
-        response.setCareUnitId("care unit id 1");
-        response.setCareUnitName("Vårdcentralen Kusten, Kärna");
-        response.setAccessDate(new XMLGregorianCalendarImpl(new GregorianCalendar()));
-        response.setPurpose("regular visit");
-        response.setResourceType("resource type 1");
+        AccessLogsResultType response = new AccessLogsResultType();
+        ResultType result = new ResultType();
+        result.setResultText("OK");
+        result.setResultCode(ResultCodeType.OK);
+		response.setResult(result);
+		
+        AccessLogType accessLog = new AccessLogType();
+        accessLog.setCareProviderId("care provider id 1 /" + registeredResidentId + " /" + logicalAddress);
+        accessLog.setCareProviderName("Vårdcentralen Kusten, Kärna");
+        accessLog.setCareUnitId("care unit id 1");
+        accessLog.setCareUnitName("Vårdcentralen Kusten, Kärna");
+        accessLog.setAccessDate(new XMLGregorianCalendarImpl(new GregorianCalendar()));
+        accessLog.setPurpose("regular visit");
+        accessLog.setResourceType("resource type 1");
 
+        AccessLogsType accessLogs = new AccessLogsType();
+        accessLogs.getAccessLog().add(accessLog);
+		response.setAccesssLogs(accessLogs);
         return response;
     }
 }

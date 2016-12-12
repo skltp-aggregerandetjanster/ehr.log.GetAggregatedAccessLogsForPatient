@@ -18,6 +18,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class ResponseListFactoryImplTest {
 
@@ -35,14 +36,14 @@ public class ResponseListFactoryImplTest {
 
         String responseXML = responseListFactory.getXmlFromAggregatedResponse(queryObject, responseList);
         GetAccessLogsForPatientResponseType response = (GetAccessLogsForPatientResponseType) jaxbUtil.unmarshal(responseXML);
-        assertEquals(2, response.getAccessLogsResultType().getAccesssLogs().getAccessLog().size());
+        assertEquals(2, response.getAccessLogsResultType().size());
     }
 
     private GetAccessLogsForPatientResponseType createGetAccessLogsForPatientResponse() {
         GetAccessLogsForPatientResponseType getCareDocResponse = new GetAccessLogsForPatientResponseType();
-        getCareDocResponse.setAccessLogsResultType(new AccessLogsResultType());
-        getCareDocResponse.getAccessLogsResultType().setAccesssLogs(new AccessLogsType());
-        getCareDocResponse.getAccessLogsResultType().getAccesssLogs().getAccessLog().add(new AccessLogType());
+        getCareDocResponse.getAccessLogsResultType().add(new AccessLogsResultType());
+        getCareDocResponse.getAccessLogsResultType().get(0).setAccesssLogs(new AccessLogsType());
+        getCareDocResponse.getAccessLogsResultType().get(0).getAccesssLogs().getAccessLog().add(new AccessLogType());
 
         return getCareDocResponse;
     }
@@ -60,7 +61,7 @@ public class ResponseListFactoryImplTest {
         }
 
         GetAccessLogsForPatientResponseType response = (GetAccessLogsForPatientResponseType) jaxbUtil.unmarshal(sb.toString());
-        assertNull(response.getAccessLogsResultType());
+        assertTrue(response.getAccessLogsResultType().size()==0);
     }
 
     @Test
@@ -77,6 +78,6 @@ public class ResponseListFactoryImplTest {
         }
 
         GetAccessLogsForPatientResponseType response = (GetAccessLogsForPatientResponseType) jaxbUtil.unmarshal(sb.toString());
-        assertEquals(1, response.getAccessLogsResultType().getAccesssLogs().getAccessLog().size());
+        assertEquals(1, response.getAccessLogsResultType().size());
     }
 }
