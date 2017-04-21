@@ -13,6 +13,9 @@ import se.skltp.agp.test.producer.TestProducerDb;
 
 import java.util.GregorianCalendar;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.XMLGregorianCalendar;
+
 public class AccessLogsForPatientTestProducerDb extends TestProducerDb {
 
     private static final Logger log = LoggerFactory.getLogger(AccessLogsForPatientTestProducerDb.class);
@@ -43,6 +46,14 @@ public class AccessLogsForPatientTestProducerDb extends TestProducerDb {
         log.debug("Created one response item for logical-address {}, registeredResidentId {} and businessObjectId {}",
                 new Object[]{logicalAddress, registeredResidentId, businessObjectId});
 
+        XMLGregorianCalendar cal = null;
+        try {
+			cal = javax.xml.datatype.DatatypeFactory.newInstance().newXMLGregorianCalendar();
+		} catch (DatatypeConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
         AccessLogsResultType response = new AccessLogsResultType();
         ResultType result = new ResultType();
         result.setResultText("OK");
@@ -54,7 +65,7 @@ public class AccessLogsForPatientTestProducerDb extends TestProducerDb {
         accessLog.setCareProviderName("Vårdcentralen Kusten, Kärna");
         accessLog.setCareUnitId("care unit id 1");
         accessLog.setCareUnitName("Vårdcentralen Kusten, Kärna");
-        accessLog.setAccessDate(new XMLGregorianCalendarImpl(new GregorianCalendar()));
+        accessLog.setAccessDate(cal);
         accessLog.setPurpose("regular visit");
         accessLog.setResourceType("resource type 1");
 
