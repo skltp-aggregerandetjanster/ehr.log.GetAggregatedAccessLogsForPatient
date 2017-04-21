@@ -1,6 +1,5 @@
 package se.skltp.aggregatingservices.riv.ehr.log.querying.getaggregatedaccesslogsforpatient.integrationtest;
 
-import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import riv.ehr.log.querying.getaccesslogsforpatientresponder.v1.GetAccessLogsForPatientResponseType;
@@ -10,8 +9,6 @@ import riv.ehr.log.querying.v1.AccessLogsType;
 import riv.ehr.log.querying.v1.ResultType;
 import riv.ehr.log.v1.ResultCodeType;
 import se.skltp.agp.test.producer.TestProducerDb;
-
-import java.util.GregorianCalendar;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -48,7 +45,7 @@ public class AccessLogsForPatientTestProducerDb extends TestProducerDb {
 
         XMLGregorianCalendar cal = null;
         try {
-			cal = javax.xml.datatype.DatatypeFactory.newInstance().newXMLGregorianCalendar();
+			cal = javax.xml.datatype.DatatypeFactory.newInstance().newXMLGregorianCalendar(2017, 04, 21, 0, 0, 0, 0, 0);
 		} catch (DatatypeConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
