@@ -6,7 +6,7 @@
   <parent>
     <groupId>se.skltp.aggregatingservices.riv.ehr.log</groupId>
     <artifactId>GetAggregatedAccessLogsForPatient-parent</artifactId>
-    <version>1.0.0-RC3-SNAPSHOT</version>
+    <version>1.0.0-RC3</version>
   </parent>
 
   <artifactId>GetAggregatedAccessLogsForPatient-teststub</artifactId>
