@@ -23,7 +23,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
   <name>GetAggregatedAccessLogsForPatient-parent</name>
 
   <properties>
-    <skltp.agp.version>2.3.2</skltp.agp.version>
+    <skltp.agp.version>2.3.3-RC2</skltp.agp.version>
   </properties>
 
   <scm>

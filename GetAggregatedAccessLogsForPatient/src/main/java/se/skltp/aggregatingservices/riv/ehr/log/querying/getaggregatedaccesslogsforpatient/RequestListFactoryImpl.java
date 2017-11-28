@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory;
 import riv.ehr.log.querying.getaccesslogsforpatientresponder.v1.GetAccessLogsForPatientRequestType;
 import se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentResponseType;
 import se.skltp.agp.service.api.QueryObject;
-import se.skltp.agp.service.api.RequestListFactory;
+import se.skltp.agp.service.api.RequestListFactoryExtended;
 
-public class RequestListFactoryImpl implements RequestListFactory {
+public class RequestListFactoryImpl implements RequestListFactoryExtended {
 
     private static final Logger log = LoggerFactory.getLogger(RequestListFactoryImpl.class);
 
