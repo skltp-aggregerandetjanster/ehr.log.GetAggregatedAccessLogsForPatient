@@ -18,7 +18,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 
   <groupId>se.skltp.aggregatingservices.riv.ehr.log</groupId>
   <artifactId>GetAggregatedAccessLogsForPatient-parent</artifactId>
-  <version>1.0.0-RC6-SNAPSHOT</version>
+  <version>1.0.0-RC6</version>
   <packaging>pom</packaging>
   <name>GetAggregatedAccessLogsForPatient-parent</name>
 
@@ -36,7 +36,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <developerConnection>
       scm:git:git://github.com/skltp-aggregerandetjanster/riv.ehr.log.GetAggregatedAccessLogsForPatient.git
     </developerConnection>
-    <tag>v2.1.1</tag>
+    <tag>v1.0.0-RC6</tag>
   </scm>
 
   <modules>
